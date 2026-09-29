@@ -1,0 +1,473 @@
+/* ==========================================================================
+   Plataforma Web de Noticias - Estilos propios
+   Se apoya en Bootstrap (vendor/bootstrap). Conserva la estructura y la
+   paleta de los mockups de la Entrega 1 (azul, grises y lavanda) con un
+   acabado más cuidado: esquinas redondeadas, sombras suaves y transiciones.
+   ========================================================================== */
+
+/* ---------- Variables de diseño ---------- */
+:root {
+  --pwn-azul: #476eb8;
+  --pwn-azul-oscuro: #35569a;
+  --pwn-azul-claro: #e8eefa;
+  --pwn-gris-claro: #f3f4f7;
+  --pwn-gris-imagen: #d9dce3;
+  --pwn-lavanda: #efeffa;
+  --pwn-verde-claro: #e6f4ea;
+  --pwn-verde: #2f7d4a;
+  --pwn-borde: #d5d9e2;
+  --pwn-texto: #1f2430;
+  --pwn-texto-suave: #5a6172;
+  --pwn-radio: 0.85rem;
+  --pwn-sombra: 0 2px 8px rgba(31, 36, 48, 0.08);
+  --pwn-sombra-fuerte: 0 10px 24px rgba(31, 36, 48, 0.16);
+}
+
+/* Oculta elementos de Alpine hasta que se inicializa (evita parpadeos). */
+[x-cloak] {
+  display: none !important;
+}
+
+/* ---------- Base ---------- */
+body {
+  background-color: #f8f9fc;
+  color: var(--pwn-texto);
+}
+
+a {
+  color: var(--pwn-azul-oscuro);
+}
+
+/* Pie de página siempre al fondo aunque el contenido sea corto. */
+.pagina {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pagina__contenido {
+  flex: 1 0 auto;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  border-radius: 0.6rem;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--pwn-azul);
+  --bs-btn-border-color: var(--pwn-azul);
+  --bs-btn-hover-bg: var(--pwn-azul-oscuro);
+  --bs-btn-hover-border-color: var(--pwn-azul-oscuro);
+  --bs-btn-active-bg: var(--pwn-azul-oscuro);
+  --bs-btn-active-border-color: var(--pwn-azul-oscuro);
+  --bs-btn-disabled-bg: var(--pwn-azul);
+  --bs-btn-disabled-border-color: var(--pwn-azul);
+  --bs-btn-focus-shadow-rgb: 71, 110, 184;
+  box-shadow: 0 2px 6px rgba(71, 110, 184, 0.35);
+}
+
+.btn-secondary {
+  --bs-btn-bg: #6b7280;
+  --bs-btn-border-color: #6b7280;
+  --bs-btn-hover-bg: #565c68;
+  --bs-btn-hover-border-color: #565c68;
+  --bs-btn-active-bg: #565c68;
+  --bs-btn-active-border-color: #565c68;
+}
+
+/* ---------- Encabezado ---------- */
+.encabezado {
+  background: linear-gradient(135deg, var(--pwn-azul) 0%, var(--pwn-azul-oscuro) 100%);
+  box-shadow: 0 2px 10px rgba(31, 36, 48, 0.2);
+}
+
+/* El menú queda fijo arriba al hacer scroll. */
+.encabezado {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.encabezado .navbar {
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+/* Marca: insignia "N" + título de la página. */
+.encabezado .navbar-brand {
+  align-items: center;
+  display: inline-flex;
+  font-size: 1.35rem;
+  font-weight: 700;
+  gap: 0.65rem;
+  letter-spacing: -0.01em;
+}
+
+.encabezado .navbar-brand::before {
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  color: var(--pwn-azul-oscuro);
+  content: "N";
+  display: inline-flex;
+  flex: none;
+  font-size: 1.15rem;
+  font-weight: 800;
+  height: 2.1rem;
+  justify-content: center;
+  width: 2.1rem;
+}
+
+/* Enlaces: píldoras con subrayado animado; la página actual va resaltada. */
+.encabezado {
+  border-bottom: 3px solid #8fb0ec;
+}
+
+/* En escritorio los enlaces se agrupan en una cápsula translúcida. */
+@media (min-width: 768px) {
+  .encabezado .navbar-nav {
+    background-color: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    gap: 0.15rem;
+    padding: 0.25rem;
+  }
+}
+
+.encabezado .navbar-nav {
+  gap: 0.25rem;
+}
+
+.encabezado .nav-link {
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  position: relative;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.encabezado .nav-link:hover,
+.encabezado .nav-link:focus-visible {
+  background-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.encabezado .nav-link:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.encabezado .nav-link.active {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  color: var(--pwn-azul-oscuro);
+  font-weight: 700;
+}
+
+.encabezado .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.7);
+  border-radius: 0.6rem;
+}
+
+.encabezado .navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.35);
+}
+
+/* Menú móvil: panel desplegable con enlaces de ancho completo. */
+@media (max-width: 767.98px) {
+  .encabezado .navbar-collapse {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: var(--pwn-radio);
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .encabezado .nav-link {
+    border-radius: 0.6rem;
+    padding: 0.7rem 1rem;
+  }
+}
+
+/* ---------- Caja de sección (bienvenida, informativa, avisos) ---------- */
+.caja {
+  background-color: var(--pwn-azul-claro);
+  border: 1px solid var(--pwn-borde);
+  border-radius: var(--pwn-radio);
+  box-shadow: var(--pwn-sombra);
+  color: var(--pwn-texto-suave);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+}
+
+/* Sección de bienvenida: bloque destacado con degradado suave. */
+#titulo-bienvenida {
+  color: var(--pwn-azul-oscuro);
+  font-weight: 700;
+}
+
+.caja--informativa {
+  background-color: var(--pwn-lavanda);
+}
+
+.caja--confirmacion {
+  background-color: var(--pwn-verde-claro);
+  border-color: #b7dcc4;
+  color: var(--pwn-verde);
+  font-weight: 600;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 480px;
+  padding: 0.9rem 1.5rem;
+}
+
+.caja__titulo {
+  color: var(--pwn-texto);
+}
+
+.testimonio {
+  color: var(--pwn-texto);
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+/* ---------- Tarjetas de noticias ---------- */
+.tarjeta-noticia {
+  background-color: #ffffff;
+  border: 1px solid var(--pwn-borde);
+  border-radius: var(--pwn-radio);
+  box-shadow: var(--pwn-sombra);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: 0 0 1.1rem;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-noticia:hover {
+  box-shadow: var(--pwn-sombra-fuerte);
+  transform: translateY(-4px);
+}
+
+/* Contenedor de imagen: recorta el zoom y sirve de base para la etiqueta. */
+.tarjeta-noticia__media {
+  overflow: hidden;
+  position: relative;
+}
+
+.tarjeta-noticia__imagen {
+  aspect-ratio: 16 / 9;
+  background-color: var(--pwn-gris-imagen);
+  display: block;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+  width: 100%;
+}
+
+.tarjeta-noticia:hover .tarjeta-noticia__imagen {
+  transform: scale(1.05);
+}
+
+/* Etiqueta de categoría sobre la imagen. */
+.tarjeta-noticia__categoria {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  box-shadow: 0 1px 4px rgba(31, 36, 48, 0.25);
+  color: var(--pwn-azul-oscuro);
+  font-size: 0.72rem;
+  font-weight: 700;
+  left: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.7rem;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0.75rem;
+}
+
+.tarjeta-noticia__fecha {
+  color: var(--pwn-texto-suave);
+  font-size: 0.8rem;
+  margin: 0.9rem 1.1rem 0;
+}
+
+/* Título (máx. 3 líneas) y descripción (máx. 3 líneas) para tarjetas parejas. */
+.tarjeta-noticia__titulo {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0.35rem 1.1rem 0.5rem;
+  overflow: hidden;
+}
+
+.tarjeta-noticia__descripcion {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: var(--pwn-texto-suave);
+  display: -webkit-box;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0 1.1rem 1rem;
+  overflow: hidden;
+}
+
+.tarjeta-noticia__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 0 1.1rem;
+}
+
+.tarjeta-noticia__acciones .btn:first-child {
+  flex: 1 1 auto;
+}
+
+/* ---------- Detalle de la noticia ---------- */
+.detalle__imagen {
+  aspect-ratio: 16 / 6;
+  background-color: var(--pwn-gris-imagen);
+  border-radius: var(--pwn-radio);
+  box-shadow: var(--pwn-sombra);
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+
+.detalle__contenido {
+  background-color: #ffffff;
+  border: 1px solid var(--pwn-borde);
+  border-radius: var(--pwn-radio);
+  box-shadow: var(--pwn-sombra);
+  color: var(--pwn-texto);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  padding: 1.75rem;
+}
+
+/* Respeta los saltos de línea del JSON (párrafos separados por línea en blanco). */
+.detalle__texto {
+  white-space: pre-line;
+}
+
+.detalle__meta {
+  color: var(--pwn-texto-suave);
+  font-size: 0.92rem;
+}
+
+/* ---------- Formularios ---------- */
+.formulario {
+  background-color: #ffffff;
+  border: 1px solid var(--pwn-borde);
+  border-radius: 1rem;
+  box-shadow: var(--pwn-sombra-fuerte);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 480px;
+  padding: 2rem 1.75rem;
+}
+
+.form-label {
+  color: var(--pwn-texto);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--pwn-gris-claro);
+  border: 1.5px solid transparent;
+  border-radius: 0.6rem;
+  color: var(--pwn-texto);
+  padding: 0.7rem 0.9rem;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:hover,
+.form-select:hover {
+  border-color: var(--pwn-borde);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: #ffffff;
+  border-color: var(--pwn-azul);
+  box-shadow: 0 0 0 0.25rem rgba(71, 110, 184, 0.2);
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  background-color: #fff5f5;
+}
+
+.invalid-feedback {
+  font-size: 0.85rem;
+}
+
+/* ---------- Ventana modal (controlada con Alpine) ---------- */
+.modal-ventana {
+  overflow-y: auto;
+}
+
+.modal-ventana .modal-content {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: var(--pwn-sombra-fuerte);
+}
+
+.modal-ventana .modal-header,
+.modal-ventana .modal-footer {
+  border-color: var(--pwn-borde);
+}
+
+/* ---------- Pie de página ---------- */
+.pie {
+  background-color: #ffffff;
+  border-top: 1px solid var(--pwn-borde);
+  color: var(--pwn-texto-suave);
+  font-size: 0.92rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.pie a {
+  color: var(--pwn-azul-oscuro);
+  text-decoration: none;
+}
+
+.pie a:hover {
+  text-decoration: underline;
+}
+
+.pie__separador {
+  margin: 0 0.5rem;
+}
+
+/* ---------- Accesibilidad: respeta la preferencia de menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .tarjeta-noticia,
+  .form-control,
+  .form-select {
+    transition: none;
+  }
+
+  .btn:hover,
+  .tarjeta-noticia:hover,
+  .tarjeta-noticia:hover .tarjeta-noticia__imagen {
+    transform: none;
+  }
+}

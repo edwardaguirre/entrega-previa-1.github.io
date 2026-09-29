@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Detalle de la noticia seleccionada en la Plataforma Web de Noticias.">
+  <title>Detalle de la Noticia | Plataforma Web de Noticias</title>
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/estilos.css">
+  <script defer src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <script defer src="data/noticias.js"></script>
+  <script defer src="assets/js/almacen.js"></script>
+  <script defer src="assets/js/componentes.js"></script>
+  <script defer src="vendor/alpine/alpine.min.js"></script>
+</head>
+<body>
+  <div class="pagina">
+
+    <!-- Encabezado con menú de navegación -->
+    <header class="encabezado">
+      <nav class="navbar navbar-expand-md navbar-dark" aria-label="Navegación principal">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">Detalle de la Noticia</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false" aria-label="Mostrar u ocultar el menú">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-md-end" id="menu-principal">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link active" href="noticias.html" aria-current="page">Noticias</a></li>
+              <li class="nav-item"><a class="nav-link" href="favoritos.html">Favoritos</a></li>
+              <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+              <li class="nav-item"><a class="nav-link" href="acerca.html">Acerca de</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="pagina__contenido container py-4" x-data="detalle">
+
+      <p x-show="$store.noticias.cargando" x-cloak class="text-muted" role="status">Cargando noticia...</p>
+      <div x-show="$store.noticias.error" x-cloak class="alert alert-danger" role="alert" x-text="$store.noticias.error"></div>
+
+      <!-- La noticia no existe (id inválido o noticia eliminada) -->
+      <div x-show="!$store.noticias.cargando && !$store.noticias.error && !noticia" x-cloak class="alert alert-warning" role="alert">
+        No se encontró la noticia solicitada. <a class="alert-link" href="noticias.html">Volver al listado de noticias</a>.
+      </div>
+
+      <!-- Detalle de la noticia -->
+      <article x-show="noticia" x-cloak>
+        <img class="detalle__imagen mb-3" :src="noticia && noticia.imagen" :alt="noticia ? 'Imagen representativa: ' + noticia.titulo : ''">
+
+        <h2 class="h3 fw-bold" x-text="noticia && noticia.titulo"></h2>
+        <p class="detalle__meta">
+          <span x-text="noticia && noticia.categoria"></span>
+          &middot; <span x-text="noticia && $store.noticias.fecha(noticia.fecha)"></span>
+          &middot; <span x-text="noticia && noticia.autor"></span>
+        </p>
+
+        <div class="detalle__contenido mb-3">
+          <p class="fw-semibold" x-text="noticia && noticia.descripcion"></p>
+          <p class="detalle__texto mb-0" x-text="noticia && noticia.contenido"></p>
+        </div>
+
+        <div x-show="aviso" x-cloak class="alert alert-info py-2" role="status" x-text="aviso"></div>
+
+        <div class="d-flex flex-wrap gap-3">
+          <button type="button" class="btn btn-primary" @click="alternarFavorito()" :aria-pressed="esFavorita" x-text="esFavorita ? 'Quitar de favoritos' : 'Agregar a favoritos'">Agregar a favoritos</button>
+          <a class="btn btn-secondary" href="contacto.html">Contacto</a>
+          <a class="btn btn-outline-secondary" href="noticias.html">Volver al listado</a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="pie">
+      <div class="container">
+        <p class="mb-1">Escríbenos a <a href="mailto:contacto@plataformanoticias.example">contacto@plataformanoticias.example</a></p>
+        <p class="mb-0">
+          <a href="contacto.html">Contacto</a>
+          <span class="pie__separador" aria-hidden="true">|</span>
+          Redes sociales:
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>,
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>,
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer">X</a>
+          <span class="pie__separador" aria-hidden="true">|</span>
+          &copy; 2026 Plataforma Web de Noticias
+        </p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
